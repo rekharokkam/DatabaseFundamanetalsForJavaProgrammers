@@ -19,7 +19,22 @@ System.out.println("\n\t" + conn.getMetaData().getDriverName());
 		}catch (Exception e)
 		{
 System.err.println(e.getClass().getName() + ": " + e.getMessage());
-			System.exit(-1);
+//			System.exit(-1);
+		}
+		finally
+		{
+			if (null !=conn)
+			{
+				try
+				{
+					conn.close();
+				}
+				catch (Exception e)
+				{
+System.err.println(e.getClass().getName() + ": " + e.getMessage());
+					System.exit(-1);
+				}
+			}
 		}
 
 	}
