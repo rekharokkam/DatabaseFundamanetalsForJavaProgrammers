@@ -4,3 +4,4 @@
 .schema <table_name> - displays create table script of given table
 .indices <table_name> - lists the user created indices on a table. Like other commercial databases SQLite created a unique index on primary key column.
 .backup main test.db - saves the in-memory default database main as test.db
+.quit OR .exit
