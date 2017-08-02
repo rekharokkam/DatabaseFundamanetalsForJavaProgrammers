@@ -47,7 +47,7 @@ public class CreateNPopulateTables
 		try
 		{
 			Class.forName("org.sqlite.JDBC");
-			return DriverManager.getConnection("jdbc:sqlite:recClub.db");
+			return DriverManager.getConnection("jdbc:sqlite:recClub.db");//If database does not exist then SQLite3 creates one and connects to it. If db already exists then sqlite3 connects to the database
 		}catch (Exception e) 
 		{
 			logError(e);
@@ -130,8 +130,6 @@ e.printStackTrace(System.err);
 	
 	private void populateActivities ()
 	{
-		float[ ] fakeWeights = {6.2f, 12.4f, 24.8f, 31.0f}; // to get some variety in the pricing
-		
 		Connection conn = openConnection();
 		if (null != conn){
 			try
@@ -143,7 +141,7 @@ e.printStackTrace(System.err);
 					pstmt.setString(1, fakeActivities[random.nextInt(fakeActivities.length)]);
 					
 					float costF = (random.nextFloat() + 1.1f) * fakeWeights[random.nextInt(fakeWeights.length)];
-					pstmt.setFloat(2, costF);// same as pstmt.setBigDecimal (2, newBigdecimal (costF));
+					pstmt.setBigDecimal (2, new BigDecimal (costF));//pstmt.setFloat(2, costF); //Best to use bigDecimal when using Money as bigDecimal works really well for money compared with float
 					
 					int rowCount = pstmt.executeUpdate();					
 //					log ("Number of customers inserted are : " + rowCount);
