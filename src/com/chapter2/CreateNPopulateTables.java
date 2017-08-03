@@ -47,7 +47,7 @@ public class CreateNPopulateTables
 		try
 		{
 			Class.forName("org.sqlite.JDBC");
-			return DriverManager.getConnection("jdbc:sqlite:recClub.db");//If database does not exist then SQLite3 creates one and connects to it. If db already exists then sqlite3 connects to the database
+			return DriverManager.getConnection("jdbc:sqlite:db/recClub.db");//If database does not exist then SQLite3 creates one and connects to it. If db already exists then sqlite3 connects to the database
 		}catch (Exception e) 
 		{
 			logError(e);

@@ -20,7 +20,7 @@ public class StatementPreparedStatement
 		try
 		{
 			Class.forName("org.sqlite.JDBC");
-			return DriverManager.getConnection("jdbc:sqlite:recClub.db");//If database does not exist then SQLite3 creates one and connects to it. If db already exists then sqlite3 connects to the database
+			return DriverManager.getConnection("jdbc:sqlite:db/recClub.db");//If database does not exist then SQLite3 creates one and connects to it. If db already exists then sqlite3 connects to the database
 		}catch (Exception e) 
 		{
 			logError(e);
@@ -107,9 +107,9 @@ e.printStackTrace(System.err);
 
 	private void demo ()
 	{
-		statementQuery ("go");
+		statementQuery ("swimming");
 		log ("\n");
-		preparedStatementQuery ("go");
+		preparedStatementQuery ("swimming");
 	}
 	
 	public static void main(String[] args)

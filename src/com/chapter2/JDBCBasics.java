@@ -11,7 +11,7 @@ public class JDBCBasics
 		
 		try{
 			Class.forName("org.sqlite.JDBC");
-			conn = DriverManager.getConnection("jdbc:sqlite:test.db");//If test.db does not exist it creates one and opens it
+			conn = DriverManager.getConnection("jdbc:sqlite:db/test.db");//If test.db does not exist it creates one and opens it
 			
 System.out.println("\n\t" + conn.getMetaData().getDatabaseProductName());
 System.out.println("\n\t" + conn.getMetaData().getDatabaseProductVersion());

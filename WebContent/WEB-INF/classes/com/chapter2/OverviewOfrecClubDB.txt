@@ -1,0 +1,3 @@
+Customer (customer_id, name)
+Activity (activity_id, name, cost)
+Session (session_id, customer_id, activity_id, from, to)

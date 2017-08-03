@@ -21,7 +21,7 @@ public class SelectQueries
 	private static final String JOIN_SELECT = "SELECT c.name as CustomerName, a.name as ActivityName, a.cost, s.fromD, s.toD FROM customers c JOIN sessions s ON c.customer_id = s.customer_id"
 			+ " JOIN activities a ON a.activity_id = s.activity_id";
 	private static final String SUBQUERY_SELECT = "SELECT name FROM customers WHERE customer_id IN "
-			+ "(SELECT customer_id FROM sessions WHERE activity_id IN (SELECT activity_id FROM activities WHERE name = 'go'))";
+			+ "(SELECT customer_id FROM sessions WHERE activity_id IN (SELECT activity_id FROM activities WHERE name = 'swimming'))";
 	
 	private void demo ()
 	{
@@ -43,7 +43,7 @@ public class SelectQueries
 		try
 		{
 			Class.forName("org.sqlite.JDBC");
-			return DriverManager.getConnection("jdbc:sqlite:recClub.db");//If database does not exist then SQLite3 creates one and connects to it. If db already exists then sqlite3 connects to the database
+			return DriverManager.getConnection("jdbc:sqlite:db/recClub.db");//If database does not exist then SQLite3 creates one and connects to it. If db already exists then sqlite3 connects to the database
 		}catch (Exception e) 
 		{
 			logError(e);
