@@ -59,24 +59,27 @@ e.printStackTrace(System.err);
 	private void statementQuery (String gameName)
 	{
 		Connection conn = openConnection();
-		try
+		if (null != conn)
 		{
-			String sql = SELECT_STATEMENT + "'" + gameName + "'))";
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sql) ;
-			
-			while (rs.next())
+			try
 			{
-				String customerName = rs.getString("name");
-				log("STATEMENT -  : " + String.format("%s plays %s", customerName, gameName));		
+				String sql = SELECT_STATEMENT + "'" + gameName + "'))";
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(sql) ;
+				
+				while (rs.next())
+				{
+					String customerName = rs.getString("name");
+					log("STATEMENT -  : " + String.format("%s plays %s", customerName, gameName));		
+				}
 			}
-		}
-		catch (SQLException sqlE)
-		{
-			logError(sqlE);
-		}
-		finally {
-			closeConnection(conn);
+			catch (SQLException sqlE)
+			{
+				logError(sqlE);
+			}
+			finally {
+				closeConnection(conn);
+			}
 		}
 	}
 
@@ -84,24 +87,28 @@ e.printStackTrace(System.err);
 	private void preparedStatementQuery (String gameName)
 	{
 		Connection conn = openConnection();
-		try
+		if (null != conn)
 		{
-			PreparedStatement pstmt = conn.prepareStatement(SELECT_PREPARED_STATEMENT);
-			pstmt.setString(1, gameName);
-			ResultSet rs = pstmt.executeQuery();
-			
-			while (rs.next())
+			try
 			{
-				String customerName = rs.getString("name");
-				log("STATEMENT -  : " + String.format("%s plays %s", customerName, gameName));		
+				PreparedStatement pstmt = conn.prepareStatement(SELECT_PREPARED_STATEMENT);
+				pstmt.setString(1, gameName);
+				ResultSet rs = pstmt.executeQuery();
+				
+				while (rs.next())
+				{
+					String customerName = rs.getString("name");
+					log("STATEMENT -  : " + String.format("%s plays %s", customerName, gameName));		
+				}
 			}
-		}
-		catch (SQLException sqlE)
-		{
-			logError(sqlE);
-		}
-		finally {
-			closeConnection(conn);
+			catch (SQLException sqlE)
+			{
+				logError(sqlE);
+			}
+			finally {
+				closeConnection(conn);
+			}
+			
 		}
 	}
 

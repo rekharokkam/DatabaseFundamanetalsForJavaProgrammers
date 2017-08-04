@@ -82,26 +82,29 @@ e.printStackTrace(System.err);
 	private void simpleSelectQuery ()
 	{
 		Connection conn = openConnection();
-		try
+		if (null != conn)
 		{
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(SIMPLE_SELECT_QUERY) ;
-			
-			while (rs.next())
+			try
 			{
-				int activity_id = rs.getInt("activity_id");
-				String name = rs.getString("name");
-				BigDecimal cost = rs.getBigDecimal("cost");
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(SIMPLE_SELECT_QUERY) ;
 				
-				log("Simple Select Query - Each Activity : " + String.format("%d %s $%.2f", activity_id, name, cost));		
+				while (rs.next())
+				{
+					int activity_id = rs.getInt("activity_id");
+					String name = rs.getString("name");
+					BigDecimal cost = rs.getBigDecimal("cost");
+					
+					log("Simple Select Query - Each Activity : " + String.format("%d %s $%.2f", activity_id, name, cost));		
+				}
 			}
-		}
-		catch (SQLException sqlE)
-		{
-			logError(sqlE);
-		}
-		finally {
-			closeConnection(conn);
+			catch (SQLException sqlE)
+			{
+				logError(sqlE);
+			}
+			finally {
+				closeConnection(conn);
+			}
 		}
 	}
 	
@@ -110,116 +113,125 @@ e.printStackTrace(System.err);
 	private void projectSelectQueries ()
 	{
 		Connection conn = openConnection();
-		try
+		if (null != conn)
 		{
-			Statement stmt = conn.createStatement();
-			ResultSet rs1 = stmt.executeQuery(PROJECTED_SELECT_QUERY_ACTIVITY) ;
-			
-			while (rs1.next())
+			try
 			{
-				BigDecimal cost = rs1.getBigDecimal("cost");
+				Statement stmt = conn.createStatement();
+				ResultSet rs1 = stmt.executeQuery(PROJECTED_SELECT_QUERY_ACTIVITY) ;
 				
-				log("Projected Query - Each Activity : " + String.format("%5.2f", cost));		
+				while (rs1.next())
+				{
+					BigDecimal cost = rs1.getBigDecimal("cost");
+					
+					log("Projected Query - Each Activity : " + String.format("%5.2f", cost));		
+				}
+				
+				ResultSet rs2 = stmt.executeQuery(PROJECTED_SELECT_QUERY_SESSION) ;
+				while (rs2.next())
+				{
+					int session_id = rs2.getInt("session_id");
+					String from = rs2.getString("fromD");
+					String to = rs2.getString("toD");
+					log ("Projected Query - Each Session : " + String.format("%2d %s %s", session_id, from, to));
+				}
 			}
-			
-			ResultSet rs2 = stmt.executeQuery(PROJECTED_SELECT_QUERY_SESSION) ;
-			while (rs2.next())
+			catch (SQLException sqlE)
 			{
-				int session_id = rs2.getInt("session_id");
-				String from = rs2.getString("fromD");
-				String to = rs2.getString("toD");
-				log ("Projected Query - Each Session : " + String.format("%2d %s %s", session_id, from, to));
+				logError(sqlE);
 			}
-		}
-		catch (SQLException sqlE)
-		{
-			logError(sqlE);
-		}
-		finally {
-			closeConnection(conn);
+			finally {
+				closeConnection(conn);
+			}
 		}
 	}
 
 	private void filteredSelectQueries ()
 	{
 		Connection conn = openConnection();
-		try
+		if (null != conn)
 		{
-			Statement stmt = conn.createStatement();
-			ResultSet rs1 = stmt.executeQuery(FILTERED_SELECT_QUERY_CUSTOMER) ;
-			
-			while (rs1.next())
+			try
 			{
-				int customer_id = rs1.getInt("customer_id");
-				String name = rs1.getString("name");
+				Statement stmt = conn.createStatement();
+				ResultSet rs1 = stmt.executeQuery(FILTERED_SELECT_QUERY_CUSTOMER) ;
 				
-				log("Filtered Query - Each customer : " + String.format("%d %s", customer_id, name));		
+				while (rs1.next())
+				{
+					int customer_id = rs1.getInt("customer_id");
+					String name = rs1.getString("name");
+					
+					log("Filtered Query - Each customer : " + String.format("%d %s", customer_id, name));		
+				}
+				
+				ResultSet rs2 = stmt.executeQuery(FILTERED_SELECT_QUERY_ACTIVITY);
+				
+				while (rs2.next())
+				{
+					int activity_id = rs2.getInt("activity_id");
+					String name = rs2.getString("name");
+					BigDecimal cost = rs2.getBigDecimal("cost");
+					
+					log (String.format("Filtered Query - Each activity : " + "%d %s $%.2f", activity_id, name, cost));
+				}
 			}
-			
-			ResultSet rs2 = stmt.executeQuery(FILTERED_SELECT_QUERY_ACTIVITY);
-			
-			while (rs2.next())
+			catch (SQLException sqlE)
 			{
-				int activity_id = rs2.getInt("activity_id");
-				String name = rs2.getString("name");
-				BigDecimal cost = rs2.getBigDecimal("cost");
-				
-				log (String.format("Filtered Query - Each activity : " + "%d %s $%.2f", activity_id, name, cost));
+				logError(sqlE);
 			}
-		}
-		catch (SQLException sqlE)
-		{
-			logError(sqlE);
-		}
-		finally {
-			closeConnection(conn);
+			finally {
+				closeConnection(conn);
+			}
 		}
 	}
 
 	private void miscFunctionsAndModifiers ()
 	{
 		Connection conn = openConnection();
-		try
+		if (null != conn)
 		{
-			Statement stmt = conn.createStatement();
-			ResultSet rs1 = stmt.executeQuery(DISTINCT_SELECT) ;
-			
-			while (rs1.next())
+			try
 			{
-				String toDate = rs1.getString("toD");
-				log("Distinct Query - To date  : " + String.format("%s", toDate));		
-			}
-			
-			ResultSet rs2 = stmt.executeQuery(DISTINCT_SELECT_GROUP_BY);
-			
-			while (rs2.next())
-			{
-				String toDate = rs2.getString("toD");
-				log("Distinct Query GROUP BY - To date  : " + String.format("%s", toDate));	
-			}
-			
-			ResultSet rs3 = stmt.executeQuery(SUM_SELECT) ;
-			
-			while (rs3.next())
-			{
-				BigDecimal costSum = rs3.getBigDecimal("TOTAL");
-				log("SUM of activities cost  : " + String.format("%f", costSum));		
-			}
+				Statement stmt = conn.createStatement();
+				ResultSet rs1 = stmt.executeQuery(DISTINCT_SELECT) ;
+				
+				while (rs1.next())
+				{
+					String toDate = rs1.getString("toD");
+					log("Distinct Query - To date  : " + String.format("%s", toDate));		
+				}
+				
+				ResultSet rs2 = stmt.executeQuery(DISTINCT_SELECT_GROUP_BY);
+				
+				while (rs2.next())
+				{
+					String toDate = rs2.getString("toD");
+					log("Distinct Query GROUP BY - To date  : " + String.format("%s", toDate));	
+				}
+				
+				ResultSet rs3 = stmt.executeQuery(SUM_SELECT) ;
+				
+				while (rs3.next())
+				{
+					BigDecimal costSum = rs3.getBigDecimal("TOTAL");
+					log("SUM of activities cost  : " + String.format("%f", costSum));		
+				}
 
-			ResultSet rs4 = stmt.executeQuery(COUNT_SELECT) ;
-			
-			while (rs4.next())
-			{
-				int countCustomers = rs4.getInt("TOTAL");
-				log("COUNT Query - total Customers  : " + String.format("%d", countCustomers));		
+				ResultSet rs4 = stmt.executeQuery(COUNT_SELECT) ;
+				
+				while (rs4.next())
+				{
+					int countCustomers = rs4.getInt("TOTAL");
+					log("COUNT Query - total Customers  : " + String.format("%d", countCustomers));		
+				}
 			}
-		}
-		catch (SQLException sqlE)
-		{
-			logError(sqlE);
-		}
-		finally {
-			closeConnection(conn);
+			catch (SQLException sqlE)
+			{
+				logError(sqlE);
+			}
+			finally {
+				closeConnection(conn);
+			}
 		}
 	}
 	
