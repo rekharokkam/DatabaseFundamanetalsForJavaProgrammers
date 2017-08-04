@@ -1,0 +1,10 @@
+Indexes take space but provide high efficiency in searches.
+Indexes is inbuilt for a primary key.
+
+CREATE UNIQUE INDEX NAMEIDX on activities (name); -- Syntax for creating indexes in SQLite3
+
+Pattern matching 
+----------------
+
+% - matches 0 or more characters/numbers
+_ - matches a single character/numeral
