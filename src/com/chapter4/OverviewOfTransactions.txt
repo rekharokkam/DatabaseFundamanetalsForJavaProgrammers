@@ -1,0 +1,33 @@
+ACID properties is the bench mark for a database transactions.
+
+All relational databases adhere to the principal that a database cannot be changed without a transaction.
+
+Transactions are either automatic or explicit - automatic transactions are provided by database.
+
+Explicit transactions are programmer defined.
+
+ACID properties of a transaction
+--------------------------------
+
+Atomicity 
+	- All the Operations inside of a transaction are Single, Atomic and Uninterrupted Operation
+	- Either everything with in a transaction succeeds or nothing does.
+	- In a multi-operation transaction , failure of a single operation rolls back the entire transaction
+	
+Consistency
+	- A transaction either creates a new and valid state of data or if any failure occurs returns all the data to its state before the transaction was started.
+	- A transaction ensures that changes made within the transaction are consistent once committed. Ex - in a transaction the salary of all the employees is raised by 5% BUT if any of the operations fail all the changes are rolled back. Employee
+	salary is returned back to the state before the transaction.
+	- Any inconsistencies in the transaction rollback happens.
+	
+Isolation 
+	- Each transaction is independent of another.
+	- Data changes inside of a transaction is not visible to another transaction.
+	- Each transaction has its own internal state that's not visible to another transaction remains private until a commit occurs.
+
+Durability 
+	- All the data changes made by a committed transaction are persistent. Even if a database fails or restarts after the commit data is intact and available in its correct form.
+	
+
+
+
