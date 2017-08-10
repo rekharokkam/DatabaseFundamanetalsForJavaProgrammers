@@ -21,7 +21,7 @@ Consistency
 	- Any inconsistencies in the transaction rollback happens.
 	
 Isolation 
-	- Each transaction is independent of another.
+	- Each transaction is independent of another. Each transaction has its own snapshot of database.
 	- Data changes inside of a transaction is not visible to another transaction.
 	- Each transaction has its own internal state that's not visible to another transaction remains private until a commit occurs.
 
