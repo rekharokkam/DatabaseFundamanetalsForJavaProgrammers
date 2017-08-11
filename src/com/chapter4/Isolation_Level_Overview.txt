@@ -1,0 +1,15 @@
+Accessibility - making data available
+Safety - making sure ACID properties of a transaction are preserved.
+
+Various Isolation levels can be thought of a degree of relaxation.
+
+conn.getIsolationLevel - returns 1-5 values
+
+Dirty read - 2 transactions - TR1 and TR2. TR1 made changes to a table row and has not yet committed. TR2 read the same table and same row and got the updates made by TR1 even though they were not committed. This is dirty read.
+Fix - conn.setIsolationLeve (TRANSACTION_READ_COMMITTED); - prevents dirty read.
+
+Non-repeatable read - TR1 read a row . TR2 made changes to the same row. TR1 read the row again but got different data as TR2 made changes to the data. Reads are not idempotent. This is non-repeatable read.
+Fix - conn.setIsolationLevel (TRANSACTION_REPEATABLE_READ);
+
+Phantom read - dealing with Select Where idiom. TR1 read a set of rows that satisfy a filter condition got 3 rows. TR2 made changes that adds a row to the condition. TR1 read data again it got 4 rows instead of 3.
+Fix - conn.setIsolationLevel (TRANSACTION_SERIALIZABLE); - default in SQLITE3. Its a high level of relaxation.  

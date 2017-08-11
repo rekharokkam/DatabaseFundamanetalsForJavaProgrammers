@@ -1,0 +1,14 @@
+								Carol ## Big Boss
+								  |
+						-------------------------------------------------------
+						|		  						|					  	|
+						Alice							Bob						Ted  ## Directly report to Big Boss
+					------------------			-----------------			-----------------
+					|		|		|			|		|		|			|		|		|
+					Edna	Joyce	Edgar		Al		Maria	Nick		Ruth	Ky		Nina
+					  |				 | 												|
+					  Joe			Terry											Petra
+					  
+					  
+2 Ways to walk this hierarchy - Breadth First search and Depth First search
+

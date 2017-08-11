@@ -170,7 +170,12 @@ e.printStackTrace(System.err);
 				int userId = getUserId(conn);
 				
 				//update both password and password change log in a transaction
-				
+				/*
+				 * Let the underlying database wrap every statement in a transaction and proceed.
+				 * We dont want that so we want an explicit transaction so the program controls when to commit and when to rollback.
+				 * Statement following the setAutoCommit (false) marks the first statement in the transaction. This transaction runs until commit/rollback. 
+				 * 
+				 */
 				conn.setAutoCommit(false);
 				String updatePasswordSQL = "UPDATE users SET password = ? WHERE uid = ?";
 				String passwordChangeLogSQL = "INSERT INTO pwdchanges (user_id, timestamp) VALUES (?, CURRENT_TIMESTAMP)";
