@@ -178,7 +178,7 @@ System.err.println (e.getClass().getName() + " : " + e.getMessage());
 		Connection conn = openConnection();
 		if (null != conn)
 		{
-			BigDecimal minCost = new BigDecimal(12.99);
+			BigDecimal minCost = new BigDecimal(15.99);
 			BigDecimal costIncreasePercentage = new BigDecimal (1.12) ;
 			
 			//print before update
@@ -210,8 +210,8 @@ System.err.println (e.getClass().getName() + " : " + e.getMessage());
 
 	private void demo ()
 	{
-//		updateRow();
-		deleteRow();
+		updateRow();
+//		deleteRow();
 	}
 	
 	public static void main(String[] args) {

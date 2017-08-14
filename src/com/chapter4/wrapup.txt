@@ -1,0 +1,10 @@
+Transaction 
+-----------
+
+Motivation behind a transaction is data integrity. Read operation there is no data integrity issues as nothing changes for read operations.
+
+In JDBC setAutoCommit to false on the connection object marks the beginning of an explicit transaction. Everything in between then and a COMMIT/ROLLBACK is the body of the transaction. COMMIT / ROLLBACK does not set the Autocommit property to false.
+
+TRigger
+-------
+Helps to automate stuff. Its event driven mechanism.
