@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="jpa"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v8.5">
@@ -16,5 +17,8 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-api-1.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jstl-impl-1.2.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/sqlite-jdbc.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/eclipselink.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.persistence.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.eclipse.persistence.jpa.modelgen.jar"/>
 	<classpathentry kind="output" path="WebContent/WEB-INF/classes"/>
 </classpath>
