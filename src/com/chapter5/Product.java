@@ -21,10 +21,11 @@ public class Product {
 	public Integer getProductId() {
 		return productId;
 	}
-
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
+	
+	//Since this field is auto generated nothing should be set explicitly
+//	public void setProductId(Integer productId) {
+//		this.productId = productId;
+//	}
 
 	public String getProductName() {
 		return productName;

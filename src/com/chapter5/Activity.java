@@ -12,14 +12,14 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@SequenceGenerator (name="seq", initialValue = 21, allocationSize=100)
+@SequenceGenerator (name="actSeq", initialValue = 21, allocationSize=100)
 @Table (name="activities")
 @NamedQuery (name="getAllActivities", query="SELECT r FROM Activity r")
 public class Activity {
 	
 	@Id //Indicates primary key
 	@Column (name="activity_id")
-	@GeneratedValue (strategy = GenerationType.SEQUENCE, generator="seq")
+	@GeneratedValue (strategy = GenerationType.SEQUENCE, generator="actSeq")
 	private Integer activityId;
 	
 	@Column
@@ -32,9 +32,10 @@ public class Activity {
 		return activityId;
 	}
 
-	public void setActivityId(Integer activityId) {
-		this.activityId = activityId;
-	}
+	//Since this field is auto generated nothing should be set explicitly here.
+//	public void setActivityId(Integer activityId) {
+//		this.activityId = activityId;
+//	}
 
 	public String getName() {
 		return name;

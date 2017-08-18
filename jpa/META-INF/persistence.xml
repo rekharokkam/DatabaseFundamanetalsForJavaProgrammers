@@ -7,7 +7,7 @@
   <persistence-unit name="ProductPU" transaction-type="RESOURCE_LOCAL"> <!-- RESOURCE_LOCAL indicates its a local resource. --> 
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>  
     <class>com.chapter5.Product</class>  
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>  
+    <exclude-unlisted-classes>true</exclude-unlisted-classes> <!-- recommendation is to make it false --> 
     <properties>  
       <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>  
       <property name="javax.persistence.jdbc.url"
@@ -33,4 +33,23 @@
       <property name="eclipselink.ddl-generation.output-mode" value="database" />    
     </properties>  
   </persistence-unit>
+  
+  <persistence-unit name="recClubPU" transaction-type="RESOURCE_LOCAL"> <!-- RESOURCE_LOCAL indicates its a local resource. --> 
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.chapter5.Customer</class>  
+    <class>com.chapter5.Activity</class>
+    <class>com.chapter5.Session</class>  
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>  
+    <properties>  
+      <property name="javax.persistence.jdbc.driver" value="org.sqlite.JDBC"/>  
+      <property name="javax.persistence.jdbc.url"
+		value="jdbc:sqlite:db/recClub.db"/>  
+        
+      <!-- EclipseLink should create the database schema automatically, if needed. -->  
+      <property name="eclipselink.ddl-generation" value="create-tables" />  
+      <property name="eclipselink.ddl-generation.output-mode" value="database" />    
+    </properties>  
+  </persistence-unit>
+  
+  
 </persistence>  

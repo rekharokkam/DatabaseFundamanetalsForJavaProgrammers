@@ -54,7 +54,7 @@ e.printStackTrace(System.err);
 		
 		Activity activity = new Activity ();
 		activity.setCost(new BigDecimal(14.99));
-		activity.setName("Quilting");
+		activity.setName("Embossing");
 		
 		if (! em.contains(activity))
 		{
@@ -226,8 +226,8 @@ System.out.print ("\t" + eachAttribute);
 	
 	private void demo ()
 	{
-//		addActivity(); //This method is only for testing multiple persistence-unit in the persistence.xml file
-//		log ("An activity is added");
+		addActivity(); //This method is only for testing multiple persistence-unit in the persistence.xml file
+		log ("An activity is added");
 		
 //		simpleSelectQuery ();
 		
@@ -245,7 +245,7 @@ System.out.print ("\t" + eachAttribute);
 		
 //		oneFieldProjection ();
 		
-		manyFieldsProjection ();
+//		manyFieldsProjection ();
 	}
 	
 	public static void main(String[] args) {
