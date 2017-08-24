@@ -1,0 +1,14 @@
+Java has 2 distinct APIs to interact with Databases
+	
+	1) JDBC - Java Database Connectivity : Thin wrapper around SQL 
+	
+	2) JPA - Java Persitance API - ORM (Object Relational Mapper) - 2 popular Implementations are - Hibernate and EclipseLink
+
+
+
+
+	SQLite3 - Most lightweight database with ACID properties. Can be used both in-memory and persistant mode
+	
+	ACID - Atomicity Consistency Isolation Durability. Required for data Integrity.
+	
+	Relational Systems have a secure mathematical foundation.

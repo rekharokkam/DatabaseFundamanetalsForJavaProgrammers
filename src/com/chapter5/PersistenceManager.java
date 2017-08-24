@@ -49,24 +49,24 @@ e.printStackTrace(System.err);
 		Product product1 = new Product ();
 		product1.setProductName("Super stuff 5");
 
-		if (! em.contains(product1)) // EntityManager maintains a list of things to persist
-		{
-			em.persist(product1); // Add product to the list of objects to persist
-		}
-
 		Product product2 = new Product ();
 		product2.setProductName("Super stuff 6");
 
-		if (! em.contains(product2)) // EntityManager maintains a list of things to persist
-		{
-			em.persist(product2); // Add product to the list of objects to persist
-		}
-		
 		em.getTransaction().begin(); // Create Transaction. Without transaction persistence is not possible as an error is thrown
 		
 		//methods persist and flush will always occur in the context of explicit transaction
 		try
-		{			
+		{
+			if (! em.contains(product1)) // EntityManager maintains a list of things to persist
+			{
+				em.persist(product1); // Add product to the list of objects to persist
+			}
+
+			if (! em.contains(product2)) // EntityManager maintains a list of things to persist
+			{
+				em.persist(product2); // Add product to the list of objects to persist
+			}
+			
 			em.flush(); //Sync the list with DB. Persist the data in DB
 		}
 		catch (PersistenceException e) // It's not mandatory to catch this exception. But I am catching it for logging purposes in case of any error

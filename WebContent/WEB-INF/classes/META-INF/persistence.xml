@@ -51,5 +51,23 @@
     </properties>  
   </persistence-unit>
   
+  <persistence-unit name="empDeptPU" transaction-type="RESOURCE_LOCAL"> <!-- RESOURCE_LOCAL indicates its a local resource. --> 
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.chapter6.Employee</class>  
+    <class>com.chapter6.Department</class>
+    <!-- In a Java SE environment, it's best to set the next element to 'false' because there's no container to scan the @Entity annotations. -->
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>  
+    <properties>  
+      <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>  
+      <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/empdept"/>
+      
+      <property name="javax.persistence.jdbc.user" value="ac-rekharokkam"/>
+      <property name="javax.persistence.jdbc.password" value="ac4success"/>
+        
+      <!-- EclipseLink should create the database schema automatically, if needed. -->  
+      <property name="eclipselink.ddl-generation" value="create-tables" />  
+      <property name="eclipselink.ddl-generation.output-mode" value="database" />    
+    </properties>  
+  </persistence-unit>
   
 </persistence>  
