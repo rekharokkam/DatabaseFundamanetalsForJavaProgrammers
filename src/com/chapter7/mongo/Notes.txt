@@ -1,0 +1,167 @@
+Some of the commands I learnt
+
+1) ps aux | grep mongo - lists all the processors, searches the list for the word "mongo"
+
+2) env | grep PATH / echo PATH both lists the PATH entries
+
+3) db.serverStatus () - returns a big JSON that represents all the server details
+
+# change/ create database myinterests 
+ use myinterests
+switched to db myinterests
+
+#Insert into the table interests
+> db.interests.insert ({name: "Rekha", interests: ["Programming", "Sewing", "Cooking"]})
+
+# fetch all the data from table interests
+db.interests.find() 
+
+# Format the output of a table fetch
+db.interests.find().pretty()
+
+JSON
+----
+BSON - introduced by Mongo - Binary JSON.
+Mongo stores documents as Key - Object-Id and Value - BSON document 
+
+Site for formatting the JSON documents - http://json.parser.online.fr/
+
+Mongo queries
+-------------
+
+db.student.stats(1026) - memory allocation and usage by a collection
+
+INSERT
+------
+db.student.insert ({name: {first: "John", last: "Shore"}, email: "john.shore@gmail.com", major: "Electrical Engineering", test_score: [{test: "ACT", score: 34},{test: "SAT", score: 650}], course_gpas: [3.09, 2.72, 2.63, 3.16, 2.99, 3.49, 3.96, 2.22]});
+
+db.student.find().pretty()
+
+db.instructor.insert({name: {first: "Wally", last: "Binns"}, email: "wally.b@gmail.com", bio: "I like to program","publications": [], "courses": []});
+
+db.instructor.find().pretty()
+
+db.course.insert({name: "history", description: "learning", number_of_students: 0, evaluations: []});
+
+INCREMENT a Numeric value
+-------------------------
+db.course.update({},{$inc: {number_of_students: 1}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.course.find()
+{ "_id" : ObjectId("59a0915b9e365978ceea7ffb"), "name" : "history", "description" : "learning", "number_of_students" : 1, "evaluations" : [ ] }
+> db.course.update({},{$inc: {number_of_students: 20}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.course.find()
+{ "_id" : ObjectId("59a0915b9e365978ceea7ffb"), "name" : "history", "description" : "learning", "number_of_students" : 21, "evaluations" : [ ] }
+
+UPDATE a collection
+-------------------
+db.course.update({}, {$push: {evaluations: {eval_comment: "This course was fabulous"}}});
+
+QUERYing Mongo
+--------------
+Mongo db uses query by example mechanism
+MongoDb allows bulk inserts in 2 ways - through command line , by adding all insert commands into a file
+
+Command Line Bulk Insert  Records
+--------------------------------
+db.student.insert([{name: {first: "OneFirst", last: "OneLast"}, email: "oneFirst.oneLast@gmail.com", major: "Electrical Engineering", test_score: [{test: "ACT", score: 34},{test: "SAT", score: 650}], course_gpas: [3.09, 2.72, 2.63, 3.16, 2.99, 3.49, 3.96, 2.22]},
+{name: {first: "TwoFirst", last: "TwoLast"}, email: "twoFirst.twoLast@gmail.com", major: "Electrical Engineering", test_score: [{test: "ACT", score: 34},{test: "SAT", score: 650}], course_gpas: [3.09, 2.72, 2.63, 3.16, 2.99, 3.49, 3.96, 2.22]},
+{name: {first: "ThreeFirst", last: "ThreeLast"}, email: "threeFirst.threeLast@gmail.com", major: "Electrical Engineering", test_score: [{test: "ACT", score: 34},{test: "SAT", score: 650}], course_gpas: [3.09, 2.72, 2.63, 3.16, 2.99, 3.49, 3.96, 2.22]}]);
+
+#Result
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 3,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+
+File Bulk Insert Records
+------------------------
+mongo coursetracker bulkStudentLoader.js
+
+Counting
+--------
+db.student.count()
+
+Limiting number of records
+--------------------------
+db.student.find().limit(4);
+
+Sorting Data
+------------
+# Sort the data based on the first name field in descending order
+#descending 
+db.student.find().sort({"name.first": -1}).limit(4);
+
+#ascending
+db.student.find().sort({"name.first": 1}).limit(4);
+
+Documents in the same collection may not share the similarities. Documents with different structure can be stored in the same database
+
+Query by Example
+----------------
+# Document must have attribute "email" and a corresponding value "oneFirst.oneLast@gmail.com"
+db.student.find({email: "oneFirst.oneLast@gmail.com"});
+
+#searching for embedded Object
+db.student.find({"name.first": "OneFirst"}); # Use dot notation for querying embedded Objects
+
+INDEXes
+-------
+Indexes Increase the speed of READs but decrease the speed of WRITE. Mongo DB inserts the record and updates affected indexes the data.
+
+db.student.ensureIndex({name: 1});
+
+#get all the indexes on a collection
+db.student.getIndexes();
+
+#View indexes for entire system
+db.system.indexes.find();
+
+REGULAR Expression - By default all regular expressions are case sensitive
+-------------------
+#fetch all the documents where firstName contains "wo"
+db.student.find ({"name.first": {$regex: "wo"}});
+#Alternate way for reading these
+db.student.find ({"name.first": /wo/});
+
+
+#Any matches that start with the given pattern
+db.student.find ({"name.first": {$regex: "^wo"}}); # No Result
+db.student.find ({"name.first": /^wo/});
+
+
+db.student.find ({"name.first": {$regex: "^Tw"}}); # 2 records
+db.student.find ({"name.first": /^Tw/});
+
+#case insensitive
+db.student.find ({"name.first": {$regex: "^tw", $options: 'i'}});
+db.student.find ({"name.first": /^tw/i});
+
+#Fetching Only field "email" on the results
+db.student.find({}, {email: 1});
+
+#Fetching Only field "email" on the results. Suppress _id column
+db.student.find({}, {email: 1, _id: 0});
+
+#Fetch the student records with only the last 5 gpas and selected columns
+db.student.find({}, {course_gpa: 1, "name.first": 1, "name.last": 1, course_gpas: {$slice: -5}});#Positive 5 returns the first 5 values, negative 5 returns the last 5 values
+
+#Starting offset and total number of records to return
+db.student.find({}, {course_gpa: 1, "name.first": 1, "name.last": 1, course_gpas: {$slice: [2, 3]}});
+
+#fetch all the students whose score is greater then 200
+db.student.find({}, {"test_score": {$elemMatch: {score: {$gt: 200}}}});
+
+#fetch all the students whose score is greater then 200 and sort desc
+db.student.find({}, {"test_score": {$elemMatch: {score: {$gt: 200}}}}).sort({"test_score.score": -1});
+
+#matching 2 conditions
+db.student.find({}, {"test_score": {$elemMatch: {score: {$gt: 200}, "test": "SAT"}}});
+

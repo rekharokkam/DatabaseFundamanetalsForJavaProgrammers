@@ -1,0 +1,21 @@
+#lists all the databases
+show dbs 
+
+#connects/Creates a database
+use recClub
+
+#lists all the tables of a database
+show collections
+
+#Assign the table to a variable
+use myinterests
+coll = db.interests
+coll.find()
+
+#C_UD Operations
+db.<CollectionName>.insert () - #Insers a new document into the collection 
+db.<CollectionName>.update () - #Updates an existing document in the collection. 
+db.<CollectionName>.save () - #either insert a new document / update an existing document in the collection. 
+db.<CollectionName>.remove () - #delete documents from the collection 
+db.<CollectionName>.drop () - #drop the collection
+db.<CollectionName>.createIndex () - # Create an index on the collection; if index already present, a no-op 

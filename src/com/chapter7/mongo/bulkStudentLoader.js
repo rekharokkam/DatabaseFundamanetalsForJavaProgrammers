@@ -1,0 +1,3 @@
+db.student.insert([{name: {first: "FourFirst", last: "FourLast"}, email: "fourFirst.fourLast@gmail.com", major: "Electrical Engineering", test_score: [{test: "ACT", score: 34},{test: "SAT", score: 650}], course_gpas: [3.09, 2.72, 2.63, 3.16, 2.99, 3.49, 3.96, 2.22]},
+{name: {first: "fiveFirst", last: "fiveLast"}, email: "fiveFirst.fiveLast@gmail.com", major: "Electrical Engineering", test_score: [{test: "ACT", score: 34},{test: "SAT", score: 650}], course_gpas: [3.09, 2.72, 2.63, 3.16, 2.99, 3.49, 3.96, 2.22]},
+{name: {first: "SixFirst", last: "SixLast"}, email: "sixFirst.sixLast@gmail.com", major: "Electrical Engineering", test_score: [{test: "ACT", score: 34},{test: "SAT", score: 650}], course_gpas: [3.09, 2.72, 2.63, 3.16, 2.99, 3.49, 3.96, 2.22]}]);
