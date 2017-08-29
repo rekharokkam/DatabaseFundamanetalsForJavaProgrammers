@@ -1,14 +1,8 @@
 package com.chapter7;
 
-import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Properties;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -166,10 +160,10 @@ e.printStackTrace(System.err);
 	{
 		MongoClient mongoClient = getConnection();
 		try{
-//			Customer customer = new Customer (customerAtomicInteger.incrementAndGet(), "FirstCustomer");
-//			populateONECustomer (customer, mongoClient);
+			Customer customer = new Customer (customerAtomicInteger.incrementAndGet(), "FirstCustomer");
+			populateONECustomer (customer, mongoClient);
 //			
-//			populateCustomers(mongoClient);
+			populateCustomers(mongoClient);
 //
 //			log ("populated Customers");
 //			
@@ -177,30 +171,16 @@ e.printStackTrace(System.err);
 //			
 //			log ("populated Activities");
 			
-			populateSessions(mongoClient);
-			log ("Populated Sessions");
+//			populateSessions(mongoClient);
+//			log ("Populated Sessions");
 			
 		}catch (Exception exception){
 			logError(exception);
 		}finally{
 			if (null != mongoClient){
-				mongoClient.close();
+				closeConnection(mongoClient);
 			}
 		}
-		
-		
-		//		createTable(CREATE_CUSTOMERS_TABLE);
-//		log ("customers table Successfully Created ");
-//		
-//		populateCustomers ();
-//		log ("Customers successfully populated");
-		
-//		createTable (CREATE_ACTIVITIES_TABLE);
-//		log ("activities table successfully created");
-//		
-//		populateActivities();
-//		log ("Activities successfully populated");
-		
 	}
 	
 	public static void main(String[] args)

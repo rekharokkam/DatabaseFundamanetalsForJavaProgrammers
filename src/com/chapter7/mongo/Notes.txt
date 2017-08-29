@@ -165,3 +165,6 @@ db.student.find({}, {"test_score": {$elemMatch: {score: {$gt: 200}}}}).sort({"te
 #matching 2 conditions
 db.student.find({}, {"test_score": {$elemMatch: {score: {$gt: 200}, "test": "SAT"}}});
 
+#deletes one record from the customers table
+db.customers.deleteOne({customer_id: 33});
+

@@ -1,0 +1,6 @@
+WiredTiger is the Storage engine
+MongoDb is server based.
+Javascript is the native language for MongoDB client.
+Java Client MongoClient is a thin wrapper around Javascript client.
+
+No-SQL approach represents a light weight web-oriented approach to data storage
